@@ -1,0 +1,65 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void merge(int a[], int start, int mid, int end){
+    int startSize = mid - start + 1;
+    int endSize = end - mid;
+    int left[startSize];
+    int right[endSize];
+
+    int k = 0;
+    for(int i = start; i <= mid; i++){
+        left[k] = a[i];
+        k++;
+    }
+
+    k = 0;
+    for(int i = mid + 1; i <= end; i++){
+        right[k] = a[i];
+        k++;
+    }
+    int i = 0, j = 0;
+    k = start;
+    while(i < startSize  && j < endSize){
+        if(left[i] <= right[j]){
+            a[k] = left[i];
+            i++;
+        }else{
+            a[k] = right[j];
+            j++;
+        }
+        k++;
+    }
+}
+
+void mergeSort(int a[], int start, int end) {
+    if(start < end){
+        int mid = (start + end)  / 2 ;
+        mergeSort(a,start,mid);
+        mergeSort(a,mid+1,end);
+        //merge(a, start, mid, end);
+        cout << "check\n";
+        for(int i = start; i < end; i++){
+            cout << a[i] << " ";
+        } 
+    }
+}
+
+
+int main() {
+    int n;
+    cin >> n;
+    int a[n];
+    
+    for(int i = 0; i < n; i++){
+        cin >> a[i];
+    }
+
+    mergeSort(a, 0, n -1);
+
+    for(int i = 0; i < n; i++){
+        cout << a[i] << " ";
+    }
+
+    return 0;
+}
